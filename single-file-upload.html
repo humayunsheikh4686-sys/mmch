@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madina Mazda Cabin House | Auto Electrical & Interior Work</title>
+    <meta name="description" content="Madina Mazda Cabin House focuses on Mazda cabin work, electrical repair, wiring, battery service, cushion fitting, car interior design, and metal fabrication for doors, windows, and grills. We support M T-3000, M T-3500, and M T-4500 work." />
+    <style>
+      :root {
+        --bg: #0b1220;
+        --bg-soft: #101b2d;
+        --panel: rgba(17, 24, 39, 0.72);
+        --text: #edf3ff;
+        --muted: #b5c4da;
+        --accent: #8ea9ff;
+        --accent-2: #b07cff;
+        --border: rgba(255,255,255,0.14);
+        --shadow: 0 24px 60px rgba(0,0,0,0.3);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: Inter, "Segoe UI", sans-serif; background: linear-gradient(140deg, #0b1220, #101c2d 38%, #182636 100%); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+      a { color: inherit; text-decoration: none; }
+      img { display: block; width: 100%; }
+      button, input, textarea, select { font: inherit; }
+      .container { width: min(1180px, calc(100% - 30px)); margin: 0 auto; }
+      .nav { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(14px); background: rgba(9, 14, 23, 0.7); border-bottom: 1px solid var(--border); }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; }
+      .brand { display: inline-flex; align-items: center; }
+      .brand-logo { width: 136px; height: auto; }
+      .nav-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+      .nav-links a, .nav-links button { color: var(--muted); background: transparent; border: none; cursor: pointer; }
+      .nav-links a:hover, .nav-links button:hover { color: var(--text); }
+      .btn, .ghost-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 20px; border: 1px solid var(--border); cursor: pointer; transition: transform 0.25s ease; }
+      .btn { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border: none; box-shadow: 0 18px 35px rgba(142, 169, 255, 0.24); }
+      .ghost-btn { background: rgba(255,255,255,0.04); color: var(--text); }
+      .btn:hover, .ghost-btn:hover { transform: translateY(-2px); }
+      .hero { padding: 90px 0 60px; }
+      .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center; }
+      .eyebrow { display: inline-block; padding: 8px 14px; border-radius: 999px; background: rgba(142, 169, 255, 0.12); border: 1px solid rgba(142, 169, 255, 0.24); letter-spacing: .16em; text-transform: uppercase; color: #dfe8ff; font-size: .72rem; }
+      h1 { margin-top: 16px; font-size: clamp(2.8rem, 5vw, 4.8rem); line-height: 1.08; letter-spacing: -0.04em; }
+      h1 span { color: #dfe6ff; }
+      .hero p { margin-top: 18px; color: var(--muted); font-size: 1.04rem; max-width: 700px; }
+      .hero-actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+      .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+      .pill { padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); color: var(--muted); font-size: 0.84rem; }
+      .hero-card { background: linear-gradient(155deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid var(--border); border-radius: 26px; padding: 26px; box-shadow: var(--shadow); }
+      .hero-card h3 { font-size: 1.5rem; margin-bottom: 8px; }
+      .tagline { color: #f0f2ff; font-weight: 700; margin-bottom: 12px; }
+      .subtext { color: var(--muted); }
+      .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+      .stat { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 16px; padding: 14px; }
+      .stat strong { display: block; margin-bottom: 4px; font-size: 1.2rem; }
+      .stat span { color: var(--muted); font-size: 0.85rem; }
+      section { padding: 70px 0; }
+      .section-title { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 26px; flex-wrap: wrap; }
+      .section-title h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+      .section-title p { color: var(--muted); }
+      .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .panel { background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border: 1px solid var(--border); border-radius: 22px; padding: 24px; box-shadow: var(--shadow); }
+      .panel h3 { margin-bottom: 8px; }
+      .panel p, .panel li { color: var(--muted); }
+      .panel ul { padding-left: 18px; display: grid; gap: 8px; }
+      .gallery-shell { display: grid; grid-template-columns: 220px 1fr; gap: 22px; }
+      .gallery-sidebar { position: sticky; top: 92px; align-self: start; display: grid; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 18px; padding: 18px; }
+      .sidebar-hint { color: #dfe8ff; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.74rem; margin-bottom: 8px; }
+      .filter-chip { border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--muted); border-radius: 12px; padding: 10px 12px; text-align: left; cursor: pointer; }
+      .filter-chip.active { background: linear-gradient(135deg, rgba(142,169,255,0.18), rgba(176,124,255,0.18)); border-color: rgba(142,169,255,0.34); color: white; }
+      .gallery-grid, .cert-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+      .card { background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+      .card img { aspect-ratio: 4/3; object-fit: cover; }
+      .card-body { padding: 16px; }
+      .meta { color: #dfe8ff; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; margin-bottom: 8px; }
+      .card-body h3 { margin-bottom: 8px; }
+      .card-body p { color: var(--muted); }
+      .open-btn { margin-top: 12px; display: inline-flex; border: none; background: transparent; color: #edf3ff; font-weight: 700; cursor: pointer; }
+      .cert-card { background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border: 1px solid var(--border); border-radius: 22px; padding: 20px; box-shadow: var(--shadow); }
+      .cert-card .icon { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(142,169,255,0.16); margin-bottom: 12px; }
+      .cert-card h3 { margin-bottom: 8px; }
+      .cert-card p { color: var(--muted); margin-bottom: 10px; }
+      .cert-card a { color: #edf3ff; font-weight: 700; }
+      .cv-card { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border: 1px solid var(--border); border-radius: 22px; padding: 22px; box-shadow: var(--shadow); }
+      .cv-card p { color: var(--muted); margin-bottom: 16px; }
+      .contact-box { background: linear-gradient(135deg, rgba(142,169,255,0.18), rgba(176,124,255,0.12)); border: 1px solid rgba(255,255,255,0.16); border-radius: 28px; text-align: center; padding: 34px 20px; box-shadow: var(--shadow); }
+      .contact-box h2 { font-size: clamp(1.8rem, 3vw, 2.7rem); margin-bottom: 12px; }
+      .contact-box p { color: var(--muted); }
+      .contact-grid { display: grid; gap: 10px; margin: 18px auto 0; max-width: 740px; text-align: left; }
+      .contact-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 16px; }
+      .contact-item strong { display: block; margin-bottom: 6px; color: #fff; }
+      .social-links { display: flex; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+      .social-links a { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+      footer { text-align: center; color: var(--muted); padding: 20px 0 70px; }
+      .fab-btn { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; border: none; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; cursor: pointer; box-shadow: 0 16px 34px rgba(0,0,0,0.32); z-index: 40; }
+      .modal { position: fixed; inset: 0; background: rgba(1,5,12,0.76); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 50; }
+      .modal.open { display: flex; }
+      .modal-panel { width: min(740px, 100%); background: #0d1728; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; padding: 24px; box-shadow: var(--shadow); }
+      .modal-panel h3 { margin-bottom: 8px; }
+      .modal-panel p { color: var(--muted); margin-bottom: 18px; }
+      .field { display: grid; gap: 8px; margin-bottom: 12px; }
+      .field input, .field textarea, .field select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; color: var(--text); padding: 10px 12px; }
+      .field textarea { min-height: 90px; resize: vertical; }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .mini-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 12px; margin-top: 10px; }
+      .mini-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+      .editor-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+      .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal.show { opacity: 1; transform: translateY(0); }
+      @media (max-width: 900px) { .hero-grid, .about-grid, .gallery-shell, .cv-card { grid-template-columns: 1fr; } .gallery-sidebar { position: static; } .gallery-grid, .cert-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 620px) { .nav-inner { flex-direction: column; } .row, .gallery-grid, .cert-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <a href="#top" class="brand" aria-label="Madina Mazda Cabin House home">
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=80" alt="Madina Mazda Cabin House logo" class="brand-logo" style="border-radius: 14px; object-fit: cover;" />
+        </a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#certifications">Services</a>
+          <a href="#contact">Contact</a>
+          <button id="editButton" type="button">Edit Content</button>
+        </div>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="eyebrow">Auto Workshop & Fabrication</span>
+            <h1 id="heroTitle">Premium <span>cabin, electrical, and metal fabrication</span> solutions for vehicles.</h1>
+            <p id="heroText"></p>
+            <div class="hero-actions">
+              <a href="#gallery" class="btn">View Work</a>
+              <a href="#contact" class="ghost-btn">Contact Us</a>
+            </div>
+            <div class="pill-row">
+              <span class="pill">Mazda cabin support</span>
+              <span class="pill">Electrical & wiring</span>
+              <span class="pill">Interior & metal work</span>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="hero-card">
+              <h3 id="nameHeading">Madina Mazda Cabin House</h3>
+              <p class="tagline" id="tagline">Mazda Cabin • Auto Electrical • Interior & Metal Work</p>
+              <p class="subtext" id="heroSubtext"></p>
+              <div class="stat-grid">
+                <div class="stat"><strong id="statOneValue">M T-3000</strong><span id="statOneLabel">Cabin series support</span></div>
+                <div class="stat"><strong id="statTwoValue">M T-4500</strong><span id="statTwoLabel">Workshop range</span></div>
+                <div class="stat"><strong id="statThreeValue">Custom</strong><span id="statThreeLabel">Interior & metal work</span></div>
+                <div class="stat"><strong id="statFourValue">24/7</strong><span id="statFourLabel">Support available</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="container reveal">
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>Focused automotive services with practical workshop solutions.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel"><h3>Company Profile</h3><p id="aboutText"></p></div>
+          <div class="panel"><h3>Core Services</h3><ul><li>Cabin and body work for Mazda vehicles</li><li>Car electrical work, wiring, and battery service</li><li>Seat cushion and interior design upgrades</li><li>Metal fabrication for doors, windows, and grills</li></ul></div>
+        </div>
+      </section>
+
+      <section id="gallery" class="container reveal">
+        <div class="section-title"><h2>Our Work</h2><p>Practical solutions for vehicle cabin, electrical, and custom interior needs.</p></div>
+        <div class="gallery-shell">
+          <aside class="gallery-sidebar">
+            <div class="sidebar-hint">Browse</div>
+            <button class="filter-chip active" data-category="All" type="button">All Work</button>
+            <button class="filter-chip" data-category="Cabin & Body" type="button">Cabin</button>
+            <button class="filter-chip" data-category="Electrical" type="button">Electrical</button>
+            <button class="filter-chip" data-category="Battery" type="button">Battery</button>
+            <button class="filter-chip" data-category="Interior" type="button">Interior</button>
+            <button class="filter-chip" data-category="Metal" type="button">Metal Work</button>
+          </aside>
+          <div><div id="galleryGrid" class="gallery-grid"></div></div>
+        </div>
+      </section>
+
+      <section id="cv" class="container reveal">
+        <div class="section-title"><h2>Business Information</h2><p>Reliable support for cabin, electrical, and fabrication work.</p></div>
+        <div class="cv-card">
+          <div>
+            <h3>Workshop Details</h3>
+            <p id="cvText"></p>
+            <div class="hero-actions"><a id="cvDownloadLink" href="#contact" class="btn">Contact Workshop</a></div>
+          </div>
+          <div class="panel"><h3>Current Focus</h3><p id="cvStatus"></p></div>
+        </div>
+      </section>
+
+      <section id="certifications" class="container reveal">
+        <div class="section-title"><h2>Service Categories</h2><p>Focused workshop offerings designed around vehicle care and fabrication.</p></div>
+        <div id="certGrid" class="cert-grid"></div>
+      </section>
+
+      <section id="contact" class="container reveal">
+        <div class="contact-box">
+          <h2>Visit or contact us for your next workshop requirement.</h2>
+          <p id="contactText"></p>
+          <div class="contact-grid">
+            <div class="contact-item"><strong>M. Sudheer</strong><a href="tel:03212181430" style="color: #edf3ff;">0321-2181430</a></div>
+            <div class="contact-item"><strong>Sheikh Waqas</strong><div style="display: flex; gap: 10px; flex-wrap: wrap;"><a href="https://wa.me/923102377333" target="_blank" rel="noreferrer" style="color: #edf3ff;">0310-2377333</a><a href="https://wa.me/923212771409" target="_blank" rel="noreferrer" style="color: #edf3ff;">0321-2771409</a></div></div>
+          </div>
+          <div class="social-links"><a href="#top" aria-label="Back to top">↑</a><a id="contactEmail" href="#" aria-label="Contact email">✉</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container"><p>Quality workshop service for reliable automotive solutions.</p></footer>
+    <button class="fab-btn" id="fabButton" type="button" aria-label="Edit content">✎</button>
+
+    <div class="modal" id="loginModal"><div class="modal-panel"><h3>Admin Login</h3><p>Enter the admin password to manage this website content.</p><form id="loginForm"><div class="field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" required /></div><div class="editor-footer"><button type="button" class="ghost-btn" id="closeLoginBtn">Close</button><button type="submit" class="btn">Login</button></div></form></div></div>
+
+    <div class="modal" id="editorModal"><div class="modal-panel" style="max-height: 90vh; overflow: auto;"><h3>Company Profile Editor</h3><p>Update the service details, gallery, and contact information. Changes save in your browser.</p><form id="editorForm"><div class="row"><div class="field"><label>Name</label><input name="name" /></div><div class="field"><label>Tagline</label><input name="tagline" /></div></div><div class="field"><label>Hero Intro</label><textarea name="heroText"></textarea></div><div class="field"><label>Hero Supporting Text</label><textarea name="heroSubtext"></textarea></div><div class="field"><label>About Text</label><textarea name="aboutText"></textarea></div><div class="row"><div class="field"><label>Contact Email</label><input name="contactEmail" /></div><div class="field"><label>Contact Message</label><input name="contactText" /></div></div><div class="row"><div class="field"><label>Stat 1 Value</label><input name="statOneValue" /></div><div class="field"><label>Stat 1 Label</label><input name="statOneLabel" /></div></div><div class="row"><div class="field"><label>Stat 2 Value</label><input name="statTwoValue" /></div><div class="field"><label>Stat 2 Label</label><input name="statTwoLabel" /></div></div><div class="row"><div class="field"><label>Stat 3 Value</label><input name="statThreeValue" /></div><div class="field"><label>Stat 3 Label</label><input name="statThreeLabel" /></div></div><div class="row"><div class="field"><label>Stat 4 Value</label><input name="statFourValue" /></div><div class="field"><label>Stat 4 Label</label><input name="statFourLabel" /></div></div><div class="field"><label>Gallery</label><div id="galleryEditor"></div><button type="button" class="ghost-btn" id="addProjectBtn" style="margin-top: 10px;">Add Work Item</button></div><div class="field"><label>Service Categories</label><div id="certEditor"></div><button type="button" class="ghost-btn" id="addCertBtn" style="margin-top: 10px;">Add Service</button></div><div class="editor-footer"><button type="button" class="ghost-btn" id="resetBtn">Reset Content</button><div style="display: flex; gap: 8px; flex-wrap: wrap;"><button type="button" class="ghost-btn" id="closeEditorBtn">Close</button><button type="submit" class="btn">Save Changes</button></div></div></form></div></div>
+
+    <div class="modal" id="projectModal"><div class="modal-panel"><img id="modalImage" alt="Project preview" style="border-radius: 18px; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 14px;" /><h3 id="modalTitle"></h3><p id="modalDescription"></p><div style="display: flex; justify-content: flex-end; margin-top: 12px;"><button type="button" class="ghost-btn" id="closeProjectModalBtn">Close</button></div></div></div>
+
+    <script>
+      const STORAGE_KEY = 'madina-mazda-single-file-v1';
+      const ADMIN_PASSWORD = 'Humayun@Admin!2026';
+      const DEFAULT_CONTENT = {
+        name: 'Madina Mazda Cabin House',
+        tagline: 'Mazda cabin • auto electrical • interior & metal work',
+        heroText: 'We focus on Mazda cabin work, auto electrical repair, wiring, battery service, cushion fitting, car interior designing, and metal fabrication for doors, windows, and grills. Our shop delivers reliable, customized workshop solutions for vehicles and commercial use, with M T-3000, M T-3500, M T-4500, and other M T-series support based on the job requirement.',
+        heroSubtext: 'Trusted auto workshop solutions for cabin parts, electrical work, interior upgrades, and professional metal fabrication.',
+        aboutText: 'Our business is centered around practical automotive workshop solutions, including Mazda cabin support, electrical work, wiring, battery repair, cushions, interior designing, and metal fabrication. We cover the main fabrication needs for doors, windows, and grills while keeping the work focused, clean, and customer-driven. We support M T-3000, M T-3500, and M T-4500 product series alongside custom workshop jobs and workshop requirements.',
+        contactEmail: '',
+        contactText: 'Plot no. 14-A, Street 1, Block 8, Zafar Town, near Mazil Pump, Landhi, Karachi',
+        statOneValue: 'M T-3000', statOneLabel: 'Cabin series support',
+        statTwoValue: 'M T-4500', statTwoLabel: 'Workshop range',
+        statThreeValue: 'Custom', statThreeLabel: 'Interior & metal work',
+        statFourValue: '24/7', statFourLabel: 'Support available',
+        gallery: [
+          { title: 'Mazda Cabin Work', category: 'Cabin & Body', description: 'Cabin repair, body matching, and dependable Mazda product support.', image: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80', detail: 'We provide fitment-focused Mazda cabin work and body support for repairs and replacement requirements.' },
+          { title: 'Auto Electrical & Wiring', category: 'Electrical', description: 'Vehicle electrical repair, wiring troubleshooting, and system upgrades.', image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80', detail: 'Our electrical work covers vehicle wiring, troubleshooting, and dependability checks for daily use.' },
+          { title: 'Battery Service', category: 'Battery', description: 'Battery testing, replacement support, and dependable power service.', image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80', detail: 'We handle battery-related vehicle issues with reliable checks and service support.' },
+          { title: 'Interior Designing', category: 'Interior', description: 'Custom cushion work and car interior enhancements for comfort and style.', image: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=900&q=80', detail: 'Interior upgrades create a cleaner, more comfortable cabin experience with custom styling.' }
+        ],
+        certifications: [
+          { title: 'Cabin & Body Service', subtitle: 'M T-3000 to M T-4500 workshop support', link: '#' },
+          { title: 'Electrical & Battery Work', subtitle: 'Wiring, troubleshooting, and power support', link: '#' },
+          { title: 'Interior & Metal Fabrication', subtitle: 'Cushions, door, window, and grill work', link: '#' }
+        ],
+        cvFile: '#contact',
+        cvText: 'We deliver reliable cabin, electrical, cushion, and metal fabrication services with dependable workshop support.',
+        cvStatus: 'Workshop support is available for Mazda cabin work, electrical systems, interior finishing, and custom metal fabrication.'
+      };
+
+      let state = loadData();
+
+      function loadData() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return structuredClone(DEFAULT_CONTENT);
+          const saved = JSON.parse(raw);
+          return { ...structuredClone(DEFAULT_CONTENT), ...saved, gallery: Array.isArray(saved.gallery) ? saved.gallery : structuredClone(DEFAULT_CONTENT.gallery), certifications: Array.isArray(saved.certifications) ? saved.certifications : structuredClone(DEFAULT_CONTENT.certifications) };
+        } catch (error) {
+          return structuredClone(DEFAULT_CONTENT);
+        }
+      }
+
+      function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function render() {
+        document.getElementById('nameHeading').textContent = state.name;
+        document.getElementById('tagline').textContent = state.tagline;
+        document.getElementById('heroText').textContent = state.heroText;
+        document.getElementById('heroSubtext').textContent = state.heroSubtext;
+        document.getElementById('aboutText').textContent = state.aboutText;
+        document.getElementById('contactText').textContent = state.contactText;
+        document.getElementById('cvText').textContent = state.cvText;
+        document.getElementById('cvStatus').textContent = state.cvStatus;
+        const emailLink = document.getElementById('contactEmail');
+        if (state.contactEmail) { emailLink.href = `mailto:${state.contactEmail}`; emailLink.title = state.contactEmail; emailLink.setAttribute('aria-label', state.contactEmail); } else { emailLink.href = '#'; emailLink.title = 'Contact email'; emailLink.setAttribute('aria-label', 'Contact email'); }
+        document.getElementById('statOneValue').textContent = state.statOneValue;
+        document.getElementById('statOneLabel').textContent = state.statOneLabel;
+        document.getElementById('statTwoValue').textContent = state.statTwoValue;
+        document.getElementById('statTwoLabel').textContent = state.statTwoLabel;
+        document.getElementById('statThreeValue').textContent = state.statThreeValue;
+        document.getElementById('statThreeLabel').textContent = state.statThreeLabel;
+        document.getElementById('statFourValue').textContent = state.statFourValue;
+        document.getElementById('statFourLabel').textContent = state.statFourLabel;
+
+        const activeCategory = document.querySelector('.filter-chip.active')?.dataset.category || 'All';
+        const filtered = state.gallery.filter(item => activeCategory === 'All' || item.category === activeCategory);
+        document.getElementById('galleryGrid').innerHTML = filtered.map(item => `
+          <article class="card reveal">
+            <img src="${item.image}" alt="${item.title}" />
+            <div class="card-body">
+              <div class="meta">${item.category}</div>
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+              <button type="button" class="open-btn" data-index="${state.gallery.indexOf(item)}">View details →</button>
+            </div>
+          </article>
+        `).join('');
+
+        document.querySelectorAll('.open-btn').forEach(button => button.addEventListener('click', () => openModal(Number(button.dataset.index))));
+        document.getElementById('certGrid').innerHTML = state.certifications.map(cert => `
+          <div class="cert-card reveal">
+            <div class="icon">✓</div>
+            <h3>${cert.title}</h3>
+            <p>${cert.subtitle}</p>
+            <a href="${cert.link || '#'}" target="_blank" rel="noreferrer">Open service →</a>
+          </div>
+        `).join('');
+
+        document.getElementById('cvDownloadLink').href = state.cvFile || '#contact';
+        initReveal();
+      }
+
+      function populateEditor() {
+        const form = document.getElementById('editorForm');
+        form.elements.name.value = state.name;
+        form.elements.tagline.value = state.tagline;
+        form.elements.heroText.value = state.heroText;
+        form.elements.heroSubtext.value = state.heroSubtext;
+        form.elements.aboutText.value = state.aboutText;
+        form.elements.contactEmail.value = state.contactEmail;
+        form.elements.contactText.value = state.contactText;
+        form.elements.statOneValue.value = state.statOneValue;
+        form.elements.statOneLabel.value = state.statOneLabel;
+        form.elements.statTwoValue.value = state.statTwoValue;
+        form.elements.statTwoLabel.value = state.statTwoLabel;
+        form.elements.statThreeValue.value = state.statThreeValue;
+        form.elements.statThreeLabel.value = state.statThreeLabel;
+        form.elements.statFourValue.value = state.statFourValue;
+        form.elements.statFourLabel.value = state.statFourLabel;
+
+        document.getElementById('galleryEditor').innerHTML = state.gallery.map((item, index) => `
+          <div class="mini-card">
+            <div class="field"><label>Title</label><input name="galleryTitle_${index}" value="${item.title}" /></div>
+            <div class="field"><label>Category</label><select name="galleryCategory_${index}"><option value="Cabin & Body" ${item.category === 'Cabin & Body' ? 'selected' : ''}>Cabin & Body</option><option value="Electrical" ${item.category === 'Electrical' ? 'selected' : ''}>Electrical</option><option value="Battery" ${item.category === 'Battery' ? 'selected' : ''}>Battery</option><option value="Interior" ${item.category === 'Interior' ? 'selected' : ''}>Interior</option><option value="Metal" ${item.category === 'Metal' ? 'selected' : ''}>Metal</option><option value="Other" ${item.category === 'Other' ? 'selected' : ''}>Other</option></select></div>
+            <div class="field"><label>Description</label><textarea name="galleryDescription_${index}">${item.description}</textarea></div>
+            <div class="field"><label>Image URL</label><input name="galleryImage_${index}" value="${item.image}" /></div>
+            <div class="field"><label>Detail</label><textarea name="galleryDetail_${index}">${item.detail}</textarea></div>
+            <div class="mini-actions"><button type="button" class="ghost-btn" data-remove-gallery="${index}">Remove</button></div>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('[data-remove-gallery]').forEach(button => button.addEventListener('click', () => removeGalleryItem(Number(button.dataset.removeGallery))));
+
+        document.getElementById('certEditor').innerHTML = state.certifications.map((cert, index) => `
+          <div class="mini-card">
+            <div class="field"><label>Title</label><input name="certTitle_${index}" value="${cert.title}" /></div>
+            <div class="field"><label>Subtitle</label><input name="certSubtitle_${index}" value="${cert.subtitle}" /></div>
+            <div class="field"><label>Link</label><input name="certLink_${index}" value="${cert.link}" /></div>
+            <div class="mini-actions"><button type="button" class="ghost-btn" data-remove-cert="${index}">Remove</button></div>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('[data-remove-cert]').forEach(button => button.addEventListener('click', () => removeCertItem(Number(button.dataset.removeCert))));
+      }
+
+      function collectEditorData(form) {
+        const galleryItems = [];
+        const certItems = [];
+        const galleryChunks = {};
+        Array.from(document.querySelectorAll('#galleryEditor input, #galleryEditor textarea, #galleryEditor select')).forEach(input => {
+          const match = input.name.match(/^(galleryTitle|galleryCategory|galleryDescription|galleryImage|galleryDetail)_(\d+)$/);
+          if (!match) return;
+          const [, field, index] = match;
+          if (!galleryChunks[index]) galleryChunks[index] = {};
+          galleryChunks[index][field] = input.value.trim();
+        });
+        Object.keys(galleryChunks).forEach(index => {
+          const item = galleryChunks[index];
+          if (item.galleryTitle || item.galleryCategory || item.galleryDescription || item.galleryImage || item.galleryDetail) {
+            galleryItems.push({ title: item.galleryTitle || 'New Work Item', category: item.galleryCategory || 'Other', description: item.galleryDescription || 'Describe this workshop work.', image: item.galleryImage || 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80', detail: item.galleryDetail || 'Additional service details.' });
+          }
+        });
+
+        const certChunks = {};
+        Array.from(document.querySelectorAll('#certEditor input')).forEach(input => {
+          const match = input.name.match(/^(certTitle|certSubtitle|certLink)_(\d+)$/);
+          if (!match) return;
+          const [, field, index] = match;
+          if (!certChunks[index]) certChunks[index] = {};
+          certChunks[index][field] = input.value.trim();
+        });
+        Object.keys(certChunks).forEach(index => {
+          const item = certChunks[index];
+          if (item.certTitle || item.certSubtitle || item.certLink) {
+            certItems.push({ title: item.certTitle || 'Service', subtitle: item.certSubtitle || 'Updated service details', link: item.certLink || '#' });
+          }
+        });
+
+        return {
+          ...state,
+          name: form.elements.name.value.trim() || DEFAULT_CONTENT.name,
+          tagline: form.elements.tagline.value.trim() || DEFAULT_CONTENT.tagline,
+          heroText: form.elements.heroText.value.trim() || DEFAULT_CONTENT.heroText,
+          heroSubtext: form.elements.heroSubtext.value.trim() || DEFAULT_CONTENT.heroSubtext,
+          aboutText: form.elements.aboutText.value.trim() || DEFAULT_CONTENT.aboutText,
+          contactEmail: form.elements.contactEmail.value.trim() || DEFAULT_CONTENT.contactEmail,
+          contactText: form.elements.contactText.value.trim() || DEFAULT_CONTENT.contactText,
+          statOneValue: form.elements.statOneValue.value.trim() || DEFAULT_CONTENT.statOneValue,
+          statOneLabel: form.elements.statOneLabel.value.trim() || DEFAULT_CONTENT.statOneLabel,
+          statTwoValue: form.elements.statTwoValue.value.trim() || DEFAULT_CONTENT.statTwoValue,
+          statTwoLabel: form.elements.statTwoLabel.value.trim() || DEFAULT_CONTENT.statTwoLabel,
+          statThreeValue: form.elements.statThreeValue.value.trim() || DEFAULT_CONTENT.statThreeValue,
+          statThreeLabel: form.elements.statThreeLabel.value.trim() || DEFAULT_CONTENT.statThreeLabel,
+          statFourValue: form.elements.statFourValue.value.trim() || DEFAULT_CONTENT.statFourValue,
+          statFourLabel: form.elements.statFourLabel.value.trim() || DEFAULT_CONTENT.statFourLabel,
+          gallery: galleryItems.length ? galleryItems : structuredClone(DEFAULT_CONTENT.gallery),
+          certifications: certItems.length ? certItems : structuredClone(DEFAULT_CONTENT.certifications),
+          cvText: state.cvText || DEFAULT_CONTENT.cvText,
+          cvStatus: state.cvStatus || DEFAULT_CONTENT.cvStatus,
+          cvFile: state.cvFile || DEFAULT_CONTENT.cvFile
+        };
+      }
+
+      function openLoginModal() { document.getElementById('loginModal').classList.add('open'); setTimeout(() => document.getElementById('adminPassword').focus(), 50); }
+      function closeLoginModal() { document.getElementById('loginModal').classList.remove('open'); document.getElementById('loginForm').reset(); }
+      function openEditorModal() { populateEditor(); document.getElementById('editorModal').classList.add('open'); }
+      function closeEditorModal() { document.getElementById('editorModal').classList.remove('open'); }
+      function saveContent() {
+        const form = document.getElementById('editorForm');
+        state = collectEditorData(form);
+        saveData();
+        render();
+        closeEditorModal();
+      }
+      function loginAdmin(event) {
+        event.preventDefault();
+        const entered = document.getElementById('adminPassword').value.trim();
+        if (entered !== ADMIN_PASSWORD) {
+          alert('Incorrect password. Only the authorized admin can edit this content.');
+          return;
+        }
+        closeLoginModal();
+        openEditorModal();
+      }
+      function addGalleryItem() { state.gallery.push({ title: 'New Workshop Item', category: 'Cabin & Body', description: 'Add your latest workshop work here.', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80', detail: 'Describe the work in more detail here.' }); populateEditor(); }
+      function addCertItem() { state.certifications.push({ title: 'New Service', subtitle: 'Add your next workshop solution', link: '#' }); populateEditor(); }
+      function removeGalleryItem(index) { state.gallery.splice(index, 1); populateEditor(); }
+      function removeCertItem(index) { state.certifications.splice(index, 1); populateEditor(); }
+      function openModal(index) { const item = state.gallery[index]; if (!item) return; document.getElementById('modalImage').src = item.image; document.getElementById('modalTitle').textContent = item.title; document.getElementById('modalDescription').textContent = item.detail; document.getElementById('projectModal').classList.add('open'); }
+      function closeModal() { document.getElementById('projectModal').classList.remove('open'); }
+      function resetContent() { state = structuredClone(DEFAULT_CONTENT); saveData(); render(); populateEditor(); }
+      function initReveal() { const elements = document.querySelectorAll('.reveal'); const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 }); elements.forEach(element => observer.observe(element)); }
+
+      document.getElementById('editButton').addEventListener('click', openLoginModal);
+      document.getElementById('fabButton').addEventListener('click', openLoginModal);
+      document.getElementById('closeLoginBtn').addEventListener('click', closeLoginModal);
+      document.getElementById('loginForm').addEventListener('submit', loginAdmin);
+      document.getElementById('closeEditorBtn').addEventListener('click', closeEditorModal);
+      document.getElementById('editorForm').addEventListener('submit', (event) => { event.preventDefault(); saveContent(); });
+      document.getElementById('addProjectBtn').addEventListener('click', addGalleryItem);
+      document.getElementById('addCertBtn').addEventListener('click', addCertItem);
+      document.getElementById('resetBtn').addEventListener('click', resetContent);
+      document.getElementById('closeProjectModalBtn').addEventListener('click', closeModal);
+      document.querySelectorAll('.filter-chip').forEach(chip => chip.addEventListener('click', () => { document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active')); chip.classList.add('active'); render(); }));
+
+      render();
+    </script>
+  </body>
+</html>

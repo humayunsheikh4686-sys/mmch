@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Madina Mazda Cabin House — Supabase</title>
+  <meta name="description" content="Madina Mazda Cabin House — static frontend with Supabase content backend" />
+  <style>/* Minimal styling preserved from original single-file */
+    body{font-family:Inter,Segoe UI,Arial,sans-serif;color:#edf3ff;background:#0b1220;margin:0}
+    .container{width:min(1100px,calc(100% - 32px));margin:32px auto}
+    .btn{background:#6f7d96;color:white;padding:8px 12px;border-radius:8px;border:none}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#dfe6ff;padding:8px 12px;border-radius:8px}
+    textarea,input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);color:#dfe6ff}
+    label{display:block;margin:8px 0 4px;color:#b5c4da}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="nameHeading">Madina Mazda Cabin House</h1>
+    <p id="tagline">Mazda cabin • auto electrical • interior & metal work</p>
+
+    <section>
+      <h2>Hero</h2>
+      <p id="heroText">Loading…</p>
+    </section>
+
+    <section>
+      <h2>About</h2>
+      <p id="aboutText">Loading…</p>
+    </section>
+
+    <section>
+      <h2>Admin</h2>
+      <div id="authArea">
+        <form id="loginForm">
+          <label>Email</label>
+          <input id="adminEmail" type="email" required />
+          <label>Password</label>
+          <input id="adminPassword" type="password" required />
+          <div style="margin-top:8px">
+            <button class="btn" type="submit">Sign in</button>
+            <button class="ghost" id="signOutBtn" type="button" style="display:none">Sign out</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="editor" style="display:none; margin-top:16px;">
+        <h3>Edit site content</h3>
+        <label>Hero Text</label>
+        <textarea id="editorHero"></textarea>
+        <label>About Text</label>
+        <textarea id="editorAbout"></textarea>
+        <div style="margin-top:8px">
+          <button id="saveBtn" class="btn">Save to Supabase</button>
+        </div>
+      </div>
+
+      <p style="margin-top:12px;color:#b5c4da;font-size:0.9rem">Note: Admin edits require a Supabase authenticated account. Create an admin user in your Supabase Auth dashboard and sign in here.</p>
+    </section>
+
+    <section style="margin-top:18px">
+      <h2>Debug</h2>
+      <pre id="debug" style="background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;color:#b5c4da;max-height:240px;overflow:auto"></pre>
+    </section>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    // Public keys (publishable) are OK to embed in a static frontend. Replace if you have different values.
+    const SUPABASE_URL = 'https://lumwkrkffqjjeiruurpd.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_CXDyQmOruPBBReL6Ixuw7g_EY2T0hfV';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const debugEl = document.getElementById('debug');
+    const nameHeading = document.getElementById('nameHeading');
+    const taglineEl = document.getElementById('tagline');
+    const heroTextEl = document.getElementById('heroText');
+    const aboutEl = document.getElementById('aboutText');
+
+    const loginForm = document.getElementById('loginForm');
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPassword = document.getElementById('adminPassword');
+    const signOutBtn = document.getElementById('signOutBtn');
+    const editor = document.getElementById('editor');
+    const editorHero = document.getElementById('editorHero');
+    const editorAbout = document.getElementById('editorAbout');
+    const saveBtn = document.getElementById('saveBtn');
+
+    function log(msg){ debugEl.textContent = (new Date()).toISOString() + '  ' + msg + '\n' + debugEl.textContent; }
+
+    async function fetchContent(){
+      try{
+        const { data, error } = await supabase.from('site_content').select('content').eq('id', 1).maybeSingle();
+        if (error) {
+          log('Read error: ' + error.message);
+          heroTextEl.textContent = 'Unable to load content (check table).';
+          aboutEl.textContent = 'Unable to load content (check table).';
+          return;
+        }
+        const content = data?.content || {
+          heroText: 'No content yet',
+          aboutText: 'No content yet'
+        };
+        heroTextEl.textContent = content.heroText || '';
+        aboutEl.textContent = content.aboutText || '';
+        editorHero.value = content.heroText || '';
+        editorAbout.value = content.aboutText || '';
+        log('Content loaded');
+      }catch(e){ log('Fetch exception: ' + e.message); }
+    }
+
+    async function upsertContent(content){
+      // require signed-in user
+      const { data: session } = await supabase.auth.getSession();
+      if (!session?.session) {
+        alert('Please sign in as an authenticated Supabase user to save changes.');
+        return;
+      }
+
+      const { error } = await supabase.from('site_content').upsert({ id: 1, content, updated_at: new Date().toISOString() });
+      if (error) {
+        log('Save error: ' + error.message);
+        alert('Save failed: ' + error.message);
+        return;
+      }
+      log('Content saved to Supabase');
+      await fetchContent();
+    }
+
+    // Auth handlers
+    loginForm.addEventListener('submit', async (ev) =>{
+      ev.preventDefault();
+      const email = adminEmail.value.trim();
+      const password = adminPassword.value.trim();
+      try{
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) { alert('Sign-in failed: ' + error.message); log('Sign-in failed: ' + error.message); return; }
+        log('Signed in: ' + (data.user?.email || 'unknown'));
+        adminEmail.value = '';
+        adminPassword.value = '';
+        updateAuthUI();
+      }catch(e){ log('Sign-in exception: ' + e.message); }
+    });
+
+    signOutBtn.addEventListener('click', async () =>{
+      await supabase.auth.signOut();
+      updateAuthUI();
+      log('Signed out');
+    });
+
+    function updateAuthUI(){
+      const user = supabase.auth.getUser();
+      supabase.auth.getSession().then(({ data })=>{
+        if (data?.session) {
+          loginForm.style.display = 'none';
+          signOutBtn.style.display = 'inline-block';
+          editor.style.display = 'block';
+        } else {
+          loginForm.style.display = 'block';
+          signOutBtn.style.display = 'none';
+          editor.style.display = 'none';
+        }
+      });
+    }
+
+    saveBtn.addEventListener('click', async () =>{
+      const content = {
+        heroText: editorHero.value.trim(),
+        aboutText: editorAbout.value.trim()
+      };
+      await upsertContent(content);
+    });
+
+    // realtime auth state listener
+    supabase.auth.onAuthStateChange((event, session) => {
+      log('Auth event: ' + event);
+      updateAuthUI();
+    });
+
+    // initial load
+    fetchContent();
+    updateAuthUI();
+
+  </script>
+</body>
+</html>

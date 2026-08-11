@@ -1,0 +1,26 @@
+{
+  "name": "humayun-shop",
+  "version": "1.0.0",
+  "description": "Dynamic automotive workshop website with secure admin editing backed by SQLite",
+  "main": "server_supabase.js",
+  "scripts": {
+  "start": "node server_supabase.js",
+  "dev": "node --watch server_supabase.js"
+  },
+  "keywords": [
+    "automotive",
+    "workshop",
+    "sqlite",
+    "azure",
+    "admin"
+  ],
+  "author": "Humayun Shop",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "better-sqlite3": "^11.1.1",
+    "express": "^4.21.2",
+    "pg": "^8.13.0"
+  }
+}
