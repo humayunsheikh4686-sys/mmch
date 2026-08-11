@@ -4,8 +4,8 @@ const { Client } = require('pg');
 
 const app = express();
 const port = Number(process.env.PORT) || 8080;
-const adminPassword = process.env.ADMIN_PASSWORD || 'Humayun@Admin!2026';
-const dbUrl = process.env.DATABASE_URL; // expected: postgresql://postgres:PASS@db.lumwkrkffqjjeiruurpd.supabase.co:5432/postgres
+const defaultAdminPassword = process.env.ADMIN_PASSWORD || 'Humayun@Admin!2026';
+const dbUrl = process.env.DATABASE_URL;
 
 if (!dbUrl) {
   console.error('FATAL: DATABASE_URL is not set. Please provide your Supabase Postgres connection string in the environment.');
@@ -25,6 +25,19 @@ async function initDb() {
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
   `);
+
+  await pgClient.query(`
+    CREATE TABLE IF NOT EXISTS app_config (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+
+  const passwordRow = await pgClient.query('SELECT value FROM app_config WHERE key = $1', ['admin_password']);
+  if (!passwordRow.rows.length) {
+    await pgClient.query('INSERT INTO app_config (key, value) VALUES ($1, $2)', ['admin_password', defaultAdminPassword]);
+  }
 
   const res = await pgClient.query('SELECT content FROM site_content WHERE id = 1');
   if (!res.rows.length) {
@@ -47,6 +60,14 @@ async function initDb() {
       cvStatus: ''
     })]);
   }
+}
+
+async function getAdminPassword() {
+  const res = await pgClient.query('SELECT value FROM app_config WHERE key = $1', ['admin_password']);
+  if (res.rows.length && res.rows[0].value) {
+    return String(res.rows[0].value);
+  }
+  return defaultAdminPassword;
 }
 
 async function getSavedContent() {
@@ -77,17 +98,27 @@ app.get('/api/content', async (_req, res) => {
   }
 });
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   const password = String(req.body.password || '').trim();
-  if (password === adminPassword) return res.json({ ok: true, message: 'Authorized admin access granted.' });
+  const expectedPassword = await getAdminPassword();
+  if (password === expectedPassword) {
+    return res.json({ ok: true, message: 'Authorized admin access granted.' });
+  }
+
   return res.status(401).json({ ok: false, message: 'Invalid admin password.' });
 });
 
 app.post('/api/content', async (req, res) => {
   const password = String(req.body.password || req.headers['x-admin-password'] || '').trim();
-  if (password !== adminPassword) return res.status(401).json({ ok: false, message: 'Unauthorized.' });
+  const expectedPassword = await getAdminPassword();
+  if (password !== expectedPassword) {
+    return res.status(401).json({ ok: false, message: 'Unauthorized.' });
+  }
+
   const incoming = req.body.content;
-  if (!incoming || typeof incoming !== 'object') return res.status(400).json({ ok: false, message: 'Content payload is required.' });
+  if (!incoming || typeof incoming !== 'object') {
+    return res.status(400).json({ ok: false, message: 'Content payload is required.' });
+  }
 
   const base = await getSavedContent();
   const merged = {
