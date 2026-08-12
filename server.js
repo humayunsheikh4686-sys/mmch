@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -196,7 +197,7 @@ async function getSavedContent() {
 function saveSQLiteContent(content) {
   const db = global.sqliteDb;
   if (!db) return;
-  db.prepare('UPDATE site_content SET content = ?, updated_at = datetime("now") WHERE id = 1').run(JSON.stringify(content));
+  db.prepare("UPDATE site_content SET content = ?, updated_at = datetime('now') WHERE id = 1").run(JSON.stringify(content));
 }
 
 async function saveContent(content) {
