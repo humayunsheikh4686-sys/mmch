@@ -734,13 +734,17 @@
         <h3>Admin Login</h3>
         <p>Enter the admin password to manage website content securely.</p>
         <form id="loginForm">
-                    <div class="field">
+          <div class="field">
+            <label for="adminEmail">Email</label>
+            <input id="adminEmail" type="email" autocomplete="username" required />
+          </div>
+          <div class="field">
             <label for="adminPassword">Password</label>
             <input id="adminPassword" type="password" autocomplete="current-password" required />
           </div>
           <div class="editor-footer">
             <button type="button" class="ghost-btn" id="closeLoginBtn">Close</button>
-            <button type="submit" class="btn">Login</button>
+            <button type="submit" class="btn">Sign in</button>
           </div>
         </form>
       </div>
@@ -1196,7 +1200,7 @@
 
       function openLoginModal() {
         document.getElementById('loginModal').classList.add('open');
-        setTimeout(() => document.getElementById('adminPassword').focus(), 50);
+        setTimeout(() => document.getElementById('adminEmail').focus(), 50);
       }
 
       function closeLoginModal() {
@@ -1215,15 +1219,26 @@
 
             async function loginAdmin(event) {
         event.preventDefault();
+        const email = document.getElementById('adminEmail').value.trim();
         const password = document.getElementById('adminPassword').value.trim();
 
-        if (password !== 'Humayun@Admin!2026') {
-          alert('Invalid password.');
+        if (!email || !password) {
+          alert('Please enter both email and password.');
+          return;
+        }
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error || !data?.session) {
+          alert(error?.message || 'Unable to sign in. Please check your credentials.');
           return;
         }
 
         isAuthenticated = true;
-        currentUser = { email: 'admin@local' };
+        currentUser = data.user;
         closeLoginModal();
         openEditorModal();
       }
