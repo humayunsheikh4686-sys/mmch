@@ -119,7 +119,7 @@
         return;
       }
 
-      const { error } = await supabase.from('site_content').upsert({ id: 1, content, updated_at: new Date().toISOString() });
+      const { error } = await supabase.from('site_content').update({ content }).eq('id', 1);
       if (error) {
         log('Save error: ' + error.message);
         alert('Save failed: ' + error.message);
