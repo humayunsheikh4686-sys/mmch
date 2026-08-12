@@ -878,7 +878,12 @@
       const SUPABASE_ANON_KEY = 'sb_publishable_CXDyQmOruPBBReL6Ixuw7g_EY2T0hfV';
 
       // Initialize Supabase client
-      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          persistSession: true,
+          detectSessionInUrl: false
+        }
+      });
 
       const DEFAULT_CONTENT = {
         name: 'Madina Mazda Cabin House',
@@ -1237,6 +1242,8 @@
           return;
         }
 
+        await supabaseClient.auth.setSession(data.session);
+
         isAuthenticated = true;
         currentUser = data.user;
         closeLoginModal();
@@ -1253,14 +1260,22 @@
         const payload = collectEditorData(form);
 
         try {
+          const sessionCheck = await supabaseClient.auth.getSession();
+          if (!sessionCheck.data?.session) {
+            alert('Your Supabase session has expired. Please sign in again.');
+            isAuthenticated = false;
+            return;
+          }
+
           const { data, error } = await supabaseClient
             .from('site_content')
-            .upsert({ id: 1, content: payload }, { onConflict: 'id' })
+            .update({ content: payload })
+            .eq('id', 1)
             .select('content')
             .single();
 
           if (error) {
-            console.error('Upsert error', error);
+            console.error('Update error', error);
             alert(error.message || 'Unable to save content.');
             return;
           }
